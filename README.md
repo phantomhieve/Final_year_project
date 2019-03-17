@@ -16,5 +16,5 @@ Short project description
 
 ## Contact info:
 
-- [phantomhieve](https://github.com/phantomhieve)[Email](mailto:khetanatulz@gmail.com)
-- [Code2sanjeev](https://github.com/Code2sanjeev)[Email](mailo:sanjeev22.m@gmail.com)
+- [phantomhieve](https://github.com/phantomhieve)   [Email](mailto:khetanatulz@gmail.com)
+- [Code2sanjeev](https://github.com/Code2sanjeev)   [Email](mailto:sanjeev22.m@gmail.com)
