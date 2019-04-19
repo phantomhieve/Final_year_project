@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import (
+    AbstractBaseUser
+)
 '''
     Special user stores weather a user is
         - Moderator
@@ -9,7 +12,8 @@ from django.db import models
     In case of Admin we store '1'.
 '''
 class special(models.Model):
-    type = models.NullBooleanField(null = False, default = 0)
+    username     = models.CharField(max_length = 255, primary_key = True)
+    type         = models.NullBooleanField(null = False, default = None)
 
 '''
     Stores the information of the users.
@@ -18,13 +22,16 @@ class special(models.Model):
     Relations
         - 'special' with special to indetify the type of user.
 '''
-class users(models.Model):
-    u_name = models.CharField(max_length = 40, unique = True, null = False)
-    password = models.CharField(max_length = 255, null = False)
-    name = models.CharField(max_length = 64, null = False)
-    dob = models.DateField(null = False)
-    country = models.CharField(max_length = 64, null = False)
-    email = models.EmailField(null = False)
-    image = models.CharField(max_length = 255, null = True)
-    contribution = models.IntegerField(default = 0)
-    special = models.ForeignKey(special, on_delete=models.CASCADE, default = None)
+class users(AbstractBaseUser):
+    username      = models.CharField(max_length = 255, null = False, unique = True)
+    name          = models.CharField(max_length = 255, null = False)
+    dob           = models.DateField(max_length = 255, null = False)
+    country       = models.CharField(max_length = 255, null = False)
+    email         = models.EmailField(max_length = 225, unique = True)
+    image         = models.CharField(max_length = 255, null = True)
+    contribution  = models.IntegerField(default = 0)
+    special       = models.ForeignKey(special, on_delete=models.CASCADE,)
+
+    USERNAME_FIELD = 'username'
+
+
