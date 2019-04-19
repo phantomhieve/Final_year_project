@@ -7,7 +7,7 @@ class RegistrationForm(forms.Form):
 
     DOY = ( i for i in range(1980, 2015) )
 
-    ''' Input fields for the form modify label if required'''
+    ''' Input fields for the form modify label if required '''
     profile    = forms.ImageField(label='Profile Picture',required = False)
     username   = forms.CharField(label='User Name')
     name       = forms.CharField(label='Name')
@@ -42,5 +42,32 @@ class RegistrationForm(forms.Form):
         except:
             return False
         return True
+
+class LoginForm(forms.Form):
+    user     = forms.CharField(label='User/E-mail')
+    password = forms.CharField(label='Password', widget = forms.PasswordInput)
+    
+    def login(self):
+
+        ''' Cleaning the data '''
+        user     = self.cleaned_data['user']
+        password = self.cleaned_data['password']
+
+        ''' Trying for user = username '''
+        try:
+            cred = users.objects.get(username = user)
+            if checkHash(password, cred.password):
+                return (True, cred)
+            return (False, 'Invalid Password.')
+        
+        except users.DoesNotExist:
+            ''' Trying for user = email '''
+            try:
+                cred = users.objects.get(email = user)
+                if checkHash(password, cred.password):
+                    return (True, cred)
+                return (False, 'Invalid Password.')
+            except users.DoesNotExist:
+                return (False, 'Username or Email dosen\'t exist.')
 
 

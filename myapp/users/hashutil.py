@@ -20,3 +20,7 @@ def checkHash(password, hash):
     if makeHash(password, salt)==hash:
         return True
     return False
+
+if __name__ == '__main__':
+    print(makeHash('root'))
+

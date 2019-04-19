@@ -23,10 +23,8 @@ class users(AbstractBaseUser):
     dob           = models.DateField(max_length = 255, null = False)
     country       = models.CharField(max_length = 255, null = False)
     email         = models.EmailField(max_length = 225, unique = True)
-    image         = models.ImageField(upload_to = 'images/profile_image', blank = True)
+    image         = models.ImageField(upload_to = 'profile_image', blank = True)
     contribution  = models.IntegerField(default = 0)
     special       = models.NullBooleanField(default = None)
 
     USERNAME_FIELD = 'username'
-
-

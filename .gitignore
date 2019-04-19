@@ -28,3 +28,4 @@ myapp/myapp/__pycache__
 myapp/myapp/__init__.pyc
 myapp/myapp/settings.pyc
 myapp/myapp/settings_secret.pyc
+myapp/myapp/media
