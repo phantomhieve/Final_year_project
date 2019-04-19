@@ -1,9 +1,8 @@
-/images
-/myapp/myapp/settings_secret.py
-/.vscode
-/.DS_Store
-/Documentation/.DS_Store
-/myapp/images
+images
+.vscode
+.DS_Store
+Documentation/.DS_Store
+myapp/images
 
 
 myapp/users/__pycache__
@@ -12,4 +11,19 @@ myapp/users/__init__.pyc
 myapp/users/apps.pyc
 myapp/users/models.pyc
 
+myapp/anime/__pycache__
+myapp/anime/migrations
+myapp/anime/__init__.pyc
+myapp/anime/apps.pyc
+myapp/anime/models.pyc
 
+myapp/actions/__pycache__
+myapp/actions/migrations
+myapp/actions/__init__.pyc
+myapp/actions/apps.pyc
+myapp/actions/models.pyc
+
+myapp/myapp/settings_secret.py
+myapp/myapp/__pycache__
+myapp/myapp/__init__.pyc
+myapp/myapp/settings.pyc
