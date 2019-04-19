@@ -3,3 +3,13 @@
 /.vscode
 /.DS_Store
 /Documentation/.DS_Store
+/myapp/images
+
+
+/users/__pycache__
+/users/migrations
+/users/__init__.pyc
+/users/apps.pyc
+/users/models.pyc
+
+
