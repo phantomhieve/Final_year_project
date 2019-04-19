@@ -6,10 +6,10 @@
 /myapp/images
 
 
-/users/__pycache__
-/users/migrations
-/users/__init__.pyc
-/users/apps.pyc
-/users/models.pyc
+myapp/users/__pycache__
+myapp/users/migrations
+myapp/users/__init__.pyc
+myapp/users/apps.pyc
+myapp/users/models.pyc
 
 
