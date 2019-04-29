@@ -1,5 +1,10 @@
-from django.urls import path
+from django.urls import path, include 
+from django.conf.urls import url
+from rest_framework import routers
+from rest_framework.urlpatterns import format_suffix_patterns
 
-# add path for users app here
-# link to project urls
-urlpatterns = []
+from . import views
+
+urlpatterns = [
+    path('anime/', views.AnimeView.as_view()),
+]

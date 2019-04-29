@@ -1,5 +1,5 @@
 from django.db import models
-from anime.models import anime, temporary, permanent
+from anime.models import Anime, Temporary, Permanent
 from users.models import users, special
 '''
     Realtionship table (many - many)
@@ -8,7 +8,7 @@ from users.models import users, special
 '''
 class views(models.Model):
     user = models.ForeignKey(users, on_delete = models.CASCADE)
-    anime = models.ForeignKey(anime, on_delete = models.CASCADE)
+    anime = models.ForeignKey(Anime, on_delete = models.CASCADE)
     class Meta:
         unique_together = ((('user', 'anime'),))
 
@@ -20,7 +20,7 @@ class views(models.Model):
 class rates(models.Model):
     rating = models.IntegerField(null = False)
     user = models.ForeignKey(users, on_delete = models.CASCADE)
-    anime = models.ForeignKey(anime, on_delete = models.CASCADE)
+    anime = models.ForeignKey(Anime, on_delete = models.CASCADE)
     class Meta:
         unique_together = ((('user', 'anime'),))
 
@@ -31,8 +31,8 @@ class rates(models.Model):
 '''
 class edits(models.Model):
     user = models.ForeignKey(users, on_delete = models.CASCADE)
-    temporary = models.ForeignKey(temporary, on_delete = models.SET_NULL, null = True)
-    permanent = models.ForeignKey(permanent, on_delete = models.CASCADE)
+    temporary = models.ForeignKey(Temporary, on_delete = models.SET_NULL, null = True)
+    permanent = models.ForeignKey(Permanent, on_delete = models.CASCADE)
     class Meta:
         unique_together = ((('user', 'temporary','permanent'),))
 
@@ -45,6 +45,6 @@ class edits(models.Model):
 class final(models.Model):
     special = models.ForeignKey(special, on_delete = models.SET_NULL, null = True)
     public = models.ForeignKey(users, on_delete = models.SET_NULL, null = True)
-    anime = models.ForeignKey(permanent, on_delete = models.CASCADE)
+    anime = models.ForeignKey(Permanent, on_delete = models.CASCADE)
     class Meta:
         unique_together = ((('special', 'public','anime'),))

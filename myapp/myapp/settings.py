@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'anime.apps.AnimeConfig',
     'actions.apps.ActionsConfig',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

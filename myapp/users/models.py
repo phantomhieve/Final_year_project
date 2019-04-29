@@ -36,7 +36,8 @@ class usersManager(BaseUserManager):
         and password.
         """
         user = self.create_user(email, username, country, name, password)
-        user.is_admin = True
+        user.is_admin     = True
+        user.is_superuser = True
         user.save(using=self._db) 
         return user
 
@@ -64,6 +65,7 @@ class users(AbstractBaseUser, PermissionsMixin):
     is_admin      = models.NullBooleanField(default = False)
     is_active     = models.BooleanField(default=True)
     is_staff      = models.BooleanField(default=True)
+    is_superuser  = models.BooleanField(default=False)
 
     objects = usersManager()
 
