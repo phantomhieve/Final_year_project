@@ -48,4 +48,3 @@ class final(models.Model):
     anime = models.ForeignKey(permanent, on_delete = models.CASCADE)
     class Meta:
         unique_together = ((('special', 'public','anime'),))
-

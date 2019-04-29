@@ -27,7 +27,6 @@ class permanent(models.Model):
 Stores temporary anime.
     Relation 
         - 'anime' with anime to identify temporary anime
-
 '''
 class temporary(models.Model):
     anime = models.ForeignKey(anime, on_delete = models.CASCADE)

@@ -1,73 +1,91 @@
-from django.forms import ModelForm
 from django import forms
+from django.contrib.auth.models import Group
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.forms import ReadOnlyPasswordHashField
+
 from .models import users, special
-from .hashutil import makeHash, checkHash
-
-class RegistrationForm(forms.Form):
-
-    DOY = ( i for i in range(1980, 2015) )
-
-    ''' Input fields for the form modify label if required '''
-    profile    = forms.ImageField(label='Profile Picture',required = False)
-    username   = forms.CharField(label='User Name')
-    name       = forms.CharField(label='Name')
-    email      = forms.EmailField(label='E-Mail')
-    password   = forms.CharField(label='Password', widget = forms.PasswordInput)
-    repassword = forms.CharField(label='Re-enter Password', widget = forms.PasswordInput)
-    country    = forms.ChoiceField(label='Country', choices = [('india', 'india')])
-    dob        = forms.DateField(label='Date of Birth', widget=forms.SelectDateWidget(years = DOY))
-
-    def save(self):
-
-        ''' Cleaning the data '''
-        profile   = self.cleaned_data['profile']
-        username  = self.cleaned_data['username']
-        name      = self.cleaned_data['name']
-        email     = self.cleaned_data['email']
-        password  = self.cleaned_data['password']
-        country   = self.cleaned_data['country']
-        dob       = self.cleaned_data['dob']
-        
-        ob = users(
-            image    = profile,
-            name     = name,
-            username = username,
-            email    = email,
-            password = makeHash(password),
-            country  = country,
-            dob      = dob
-        )
-        try:
-            ob.save()
-        except:
-            return False
-        return True
 
 class LoginForm(forms.Form):
-    user     = forms.CharField(label='User/E-mail')
+    '''
+    A login form prompted to the user for login acess.
+    '''
+    user     = forms.EmailField(label='E-mail')
     password = forms.CharField(label='Password', widget = forms.PasswordInput)
-    
-    def login(self):
 
-        ''' Cleaning the data '''
+    # Cleaning the data provided by the user
+    def clean_data(self):
         user     = self.cleaned_data['user']
         password = self.cleaned_data['password']
+        return user, password
 
-        ''' Trying for user = username '''
-        try:
-            cred = users.objects.get(username = user)
-            if checkHash(password, cred.password):
-                return (True, cred)
-            return (False, 'Invalid Password.')
-        
-        except users.DoesNotExist:
-            ''' Trying for user = email '''
-            try:
-                cred = users.objects.get(email = user)
-                if checkHash(password, cred.password):
-                    return (True, cred)
-                return (False, 'Invalid Password.')
-            except users.DoesNotExist:
-                return (False, 'Username or Email dosen\'t exist.')
+class UserCreationForm(forms.ModelForm):
+    """A form for creating new users. Includes all the required
+    fields, plus a repeated password."""
+    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
 
+    class Meta:
+        model = users
+        fields = ('username', 'email', 'name', 'dob', 'country',
+        'image')
 
+    def clean_password2(self):
+        # Check that the two password entries match
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError("Passwords don't match")
+        return password2
+
+    def save(self, commit=True):
+        # Save the provided password in hashed format
+        user = super(UserCreationForm, self).save(commit=False)
+        user.set_password(self.cleaned_data["password1"])
+        if commit:
+            user.save()
+        return user
+
+class UserChangeForm(forms.ModelForm):
+    """A form for updating users. Includes all the fields on
+    the user, but replaces the password field with admin's
+    password hash display field.
+    """
+    password = ReadOnlyPasswordHashField()
+
+    class Meta:
+        model = users
+        fields = ('username', 'email', 'name', 'dob', 'country',
+        'image', 'contribution', 'is_admin', 'is_mod', 'is_active', 'is_staff')
+
+    def clean_password(self):
+        # Regardless of what the user provides, return the initial value.
+        # This is done here, rather than on the field, because the
+        # field does not have access to the initial value
+        return self.initial["password"]
+
+class UserAdmin(BaseUserAdmin):
+    # The forms to add and change user instances
+    form = UserChangeForm
+    add_form = UserCreationForm
+
+    # The fields to be used in displaying the User model.
+    # These override the definitions on the base UserAdmin
+    # that reference specific fields on auth.User.
+    list_display = ('email', 'username', 'is_admin')
+    list_filter = ('is_admin',)
+    fieldsets = (
+        (None, {'fields': ('email', 'password')}),
+        ('Personal info', {'fields': ('dob', 'name', 'country', 'image', 'contribution', )}),
+        ('Permissions', {'fields': ('is_admin', 'is_mod', )}),
+    )
+    # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
+    # overrides get_fieldsets to use this attribute when creating a user.
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('email', 'username', 'password1', 'password2')}
+        ),
+    )
+    search_fields = ('email',)
+    ordering = ('email',)
+    filter_horizontal = ()
