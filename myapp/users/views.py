@@ -1,9 +1,9 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
-from .forms import LoginForm, UserChangeForm
+from .forms import LoginForm, UserCreationForm
 
 def register_view(request):
     if request.method == 'POST':
@@ -31,10 +31,13 @@ def login_view(request):
     args = {'form': form}
     return render(request, 'accounts/login.html', args)
 
-@login_required
+@login_required()
 def main_view(request):
-    print('Here')
     args = {
         'user': request.user
     }
     return render(request, 'accounts/main.html', args)
+
+def logout_view(request):
+    logout(request)
+    return redirect(login_view)

@@ -8,6 +8,9 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+from django.urls import reverse
+
+
 from .settings_secret import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -109,6 +112,9 @@ STATIC_URL = '/static/'
 MEDIA_URL  = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'myapp/media')
 
-# verride the default user model by providing a value for 
+# override the default user model by providing a value for 
 # the AUTH_USER_MODEL setting that references a custom model
 AUTH_USER_MODEL = 'users.users'
+
+# Redirect to login page if the user in not logged in
+LOGIN_URL = '/'
