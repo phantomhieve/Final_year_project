@@ -110,8 +110,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+STATIC_ROOT = os.path.join(BASE_DIR, "static/static_cdn")
+
+
 MEDIA_URL  = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'myapp/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media_cdn')
 
 # override the default user model by providing a value for 
 # the AUTH_USER_MODEL setting that references a custom model

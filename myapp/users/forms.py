@@ -5,19 +5,6 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 from .models import users
 
-class LoginForm(forms.Form):
-    '''
-    A login form prompted to the user for login acess.
-    '''
-    user     = forms.EmailField(label='E-mail')
-    password = forms.CharField(label='Password', widget = forms.PasswordInput)
-
-    # Cleaning the data provided by the user
-    def clean_data(self):
-        user     = self.cleaned_data['user']
-        password = self.cleaned_data['password']
-        return user, password
-
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""

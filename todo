@@ -1,3 +1,8 @@
+- requirements
+  - djangorestframework
+  - pillow
+  - channels
+
 Front end (Sanjeev)
   - login
   - signup
