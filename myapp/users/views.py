@@ -1,68 +1,94 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import login, authenticate, logout, get_user
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from rest_framework import viewsets, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.permissions import IsAuthenticated
 
-from .forms import UserCreationForm
-from .models import users
-
+from .forms import UserCreationForm, LoginForm
 
 class login_view(APIView):
     def get(self, request):
         return render(request, 'accounts/login.html')
 
     def post(self, request):
-        # need to clean data here
-        username = request.POST.get('username', '')
-        password = request.POST.get('pass', '')
-        user = authenticate(
-            username=username,
-            password=password
-        )
+        form  = LoginForm(request.POST)
         status = False
-        if user:
-            login(request, user)
-            status = True
-        return Response({
-            'success': status
-        })
-
-class check_view(APIView):
-    def get(self, request):
-        pass
-
-    def post(self, request):
-
-        # need to clean data here
-        username = request.POST.get('name', '')
-        password = request.POST.get('pass', '')
-        status = True
-        user = users.objects.filter(username=username)
-        if user or username=='' or password =='': 
-            status = False
-        else:
-            user = users(username=username)
-            user.set_password(password)
-            user.save()
-            login(request, user)
+        if form.is_valid():
+            username, password = form.clean_data()
+            user = authenticate(
+                username=username,
+                password=password
+            )
+            if user:
+                login(request, user)
+                status= True
         return Response({
             'success': status
         })
 
 class register_view(APIView):
-    permission_classes = (IsAuthenticated,)
-    def get(self, request):
-        form = UserCreationForm()
-        args = {'form': form}
-        return render(request, 'accounts/register.html', args)
+        
+    def get(self):
+        pass
 
     def post(self, request):
-        pass
+        
+        form = LoginForm(request.POST)
+        status = False
+        if form.is_valid():
+            username, password = form.clean_data()
+            if form.check(username, password):
+                status = True
+                user = form.save(username, password)
+                login(request, user)
+        return Response({
+            'success': status
+        })
+
+class profile_view(APIView):
+    permission_classes = (IsAuthenticated,)
+    def get(self, request):
+        user = get_user(request)
+
+        fname, lname, name  = '', '', user.name
+        if name: 
+            if ' ' in name:
+                index = name.index(' ')
+                fname = name[:index+1]
+                lname = name[index+1:]
+            else:
+                fname = name
+        data = {
+            'username': user.username,
+            'email'   : user.email if user.email else '',
+            'dob'     : user.dob if user.dob else '',
+            'country' : user.country if user.country else '',
+            'image'   : user.image,
+            'fname'   : fname,
+            'lname'   : lname,
+        }
+        return render(request, 'accounts/profile.html', data)
+    def post(self, request):
+        print(request.POST)
+        status = False
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = get_user(request)
+            print(request.POST.get('image', None))
+            user.image = request.POST.get('image', None)
+            print('Valid form')
+            status = form.change(user)
+        else:
+            print('Not a valid form')
+        print(status)        
+        return Response({
+            'success': status
+        })        
 
 @login_required()
 def main_view(request):

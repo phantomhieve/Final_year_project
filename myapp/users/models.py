@@ -57,7 +57,7 @@ class users(AbstractBaseUser, PermissionsMixin):
     dob           = models.DateField(max_length = 255, null = True)
     country       = models.CharField(max_length = 255, null = True)
     email         = models.EmailField(max_length = 225, unique = True, null = True)
-    image         = models.ImageField(upload_to = 'profile_image', blank = True)
+    image         = models.ImageField(upload_to = 'profile_image/', blank = True)
     contribution  = models.IntegerField(default = 0)
     is_mod        = models.NullBooleanField(default = False)
 
@@ -70,4 +70,7 @@ class users(AbstractBaseUser, PermissionsMixin):
     objects = usersManager()
 
     USERNAME_FIELD = 'username'
+    
+    def __str__(self):
+        return self.username
 

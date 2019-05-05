@@ -5,32 +5,46 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 from .models import users
 
-class UserCreationForm(forms.ModelForm):
-    """A form for creating new users. Includes all the required
-    fields, plus a repeated password."""
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+class LoginForm(forms.Form):
+    '''
+    A login form prompted to the user for login acess.
+    '''
+    username = forms.CharField(label='Username')
+    password = forms.CharField(label='Password', widget = forms.PasswordInput)
 
+    def clean_data(self):
+        username = self.cleaned_data['username']
+        password = self.cleaned_data['password']
+        return username, password
+    
+    def check(self, username, password):
+        user = users.objects.filter(username=username)
+        if user or username=='' or password =='': return False
+        return True
+    
+    def save(self, username, password):
+        user = users(username=username)
+        user.set_password(password)
+        user.save()
+        return user
+
+
+class UserCreationForm(forms.ModelForm):
     class Meta:
         model = users
-        fields = ('username', 'email', 'name', 'dob', 'country',
-        'image')
-
-    def clean_password2(self):
-        # Check that the two password entries match
-        password1 = self.cleaned_data.get("password1")
-        password2 = self.cleaned_data.get("password2")
-        if password1 and password2 and password1 != password2:
-            raise forms.ValidationError("Passwords don't match")
-        return password2
-
-    def save(self, commit=True):
-        # Save the provided password in hashed format
-        user = super(UserCreationForm, self).save(commit=False)
-        user.set_password(self.cleaned_data["password1"])
-        if commit:
+        fields = ('email', 'name', 'country', 'image',
+        'dob')
+    
+    def change(self, user):
+        user.email   = self.cleaned_data['email']
+        user.name    = self.cleaned_data['name']
+        user.country = self.cleaned_data['country']
+        user.dob     = self.cleaned_data['dob']
+        try:
             user.save()
-        return user
+            return True
+        except:
+            return False 
 
 class UserChangeForm(forms.ModelForm):
     """A form for updating users. Includes all the fields on

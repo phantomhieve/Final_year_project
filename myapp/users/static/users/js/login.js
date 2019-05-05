@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', ()=>{
     var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
-    const base = 'http://127.0.0.1:8000/'
+    const base = window.location.origin;
     document.querySelector('#login').onclick  = ()=>{
         const request = new XMLHttpRequest();
 
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         request.onload = ()=>{
             const data = JSON.parse(request.responseText);
             if(data.success)
-                window.location.replace(base+'main/');
+                window.location.replace(base+'/main/');
             else
                 document.querySelector('#message_login').innerHTML = 'Invalid Username/Password';
             
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         request.setRequestHeader("X-CSRFToken", csrftoken);
         const data = new FormData();
         data.append('username', name);
-        data.append('pass', pass);
+        data.append('password', pass);
         request.send(data);
         return false;
     }
@@ -46,11 +46,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
             return false;
         }
 
-        request.open('POST', base+'check/');
+        request.open('POST', base+'/register/');
         request.onload = ()=>{
             const data = JSON.parse(request.responseText);
             if(data.success)
-                window.location.replace(base+'register/')
+                window.location.replace(base+'/profile/')
             else
                 message = 'Username allredy exist';
             document.querySelector('.message_register').innerHTML = message;
@@ -58,8 +58,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
         
         request.setRequestHeader("X-CSRFToken", csrftoken);
         const data = new FormData();
-        data.append('name', name);
-        data.append('pass', pass);
+        data.append('username', name);
+        data.append('password', pass);
         request.send(data);
         return false;
     }
