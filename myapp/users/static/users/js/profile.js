@@ -1,6 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
     var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
     const base = window.location.origin;
+
+
+    /*
+        emulate form submission on 'Enter'
+    */
+    document.querySelector('body').addEventListener('keydown', event=>{
+        if (event.keyCode == 13) 
+            document.querySelector('#login').click();
+    });
+
+    /*
+        Function to update the user data.
+    */
     document.querySelector('#edit_profile').onclick = () => {
         alert('hello');
         const request = new XMLHttpRequest();
@@ -35,10 +48,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
     
-    //document.querySelector('#change_pass').onclick = () => {
+    /*
+        Function to change user password.
+    */
+    document.querySelector('#change_pass').onclick = () => {
 
-    //}
-    
+    }
+
+    /*
+        Function to display image before upload.
+    */
     document.getElementById("pic").onchange = function () {
         var reader = new FileReader();
         reader.onload = function (e) {

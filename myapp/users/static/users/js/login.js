@@ -1,6 +1,18 @@
 document.addEventListener('DOMContentLoaded', ()=>{
     var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
     const base = window.location.origin;
+
+    /*
+        emulate login on 'Enter'
+    */
+    document.querySelector('#pass').addEventListener('keydown', event=>{
+        if (event.keyCode == 13) 
+            document.querySelector('#login').click();
+    });
+
+    /*
+        login the user.
+    */
     document.querySelector('#login').onclick  = ()=>{
         const request = new XMLHttpRequest();
 
@@ -26,6 +38,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
 
 
+    /*
+        emulate register on 'Enter'
+    */
+    document.querySelector('#reregpass').addEventListener('keydown', event=>{
+        if (event.keyCode == 13) 
+            document.querySelector('#register').click();
+    });
+
+    /*
+       register the user.
+    */
 
     document.querySelector('#register').onclick  = ()=>{
         const request = new XMLHttpRequest();
