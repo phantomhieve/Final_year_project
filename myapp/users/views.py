@@ -9,7 +9,8 @@ from rest_framework.response import Response
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.permissions import IsAuthenticated
 
-from .forms import UserCreationForm, LoginForm
+from .forms import ProfileForm, LoginForm
+from .backend import getUserdata
 
 class login_view(APIView):
     def get(self, request):
@@ -37,7 +38,6 @@ class register_view(APIView):
         pass
 
     def post(self, request):
-        
         form = LoginForm(request.POST)
         status = False
         if form.is_valid():
@@ -54,38 +54,19 @@ class profile_view(APIView):
     permission_classes = (IsAuthenticated,)
     def get(self, request):
         user = get_user(request)
-
-        fname, lname, name  = '', '', user.name
-        if name: 
-            if ' ' in name:
-                index = name.index(' ')
-                fname = name[:index+1]
-                lname = name[index+1:]
-            else:
-                fname = name
-        data = {
-            'username': user.username,
-            'email'   : user.email if user.email else '',
-            'dob'     : user.dob if user.dob else '',
-            'country' : user.country if user.country else '',
-            'image'   : user.image,
-            'fname'   : fname,
-            'lname'   : lname,
-        }
+        data = getUserdata(user)
+        print(data)
         return render(request, 'accounts/profile.html', data)
+
+
     def post(self, request):
-        print(request.POST)
         status = False
-        form = UserCreationForm(request.POST)
+        image  = request.FILES.get('image', None)
+        form = ProfileForm(request.POST)
         if form.is_valid():
             user = get_user(request)
-            print(request.POST.get('image', None))
-            user.image = request.POST.get('image', None)
-            print('Valid form')
-            status = form.change(user)
-        else:
-            print('Not a valid form')
-        print(status)        
+            user.image = image
+            status = form.change(user)       
         return Response({
             'success': status
         })        

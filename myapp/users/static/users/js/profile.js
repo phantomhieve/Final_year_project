@@ -9,24 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const email   = document.querySelector('#email').value;
         const country = document.querySelector('#country').value;
         const dob     = document.querySelector('#dob').value;
-        var pic;
+        const pic     = document.querySelector('#pic');
         
-        var input = document.querySelector("#pic");
-        var fReader = new FileReader();
-        fReader.readAsDataURL(input.files[0]);
-        fReader.onloadend = function(event){
-            var img = document.getElementById("yourImgTag");
-            pic = event.target.result;
-            
-
-        }
-
-
-
-
-
         request.open('POST', base+'/profile/');
-        
+
         request.onload = ()=>{
             const data = JSON.parse(request.responseText);
             message = 'Sucessfully updated data'
@@ -37,8 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
         
         request.setRequestHeader("X-CSRFToken", csrftoken);
         const data = new FormData();
+        new FileReader
         data.append('name', fname+' '+lname)
-        data.append('image', pic);
+        data.append('image', pic.files[0]);
         data.append('email', email);
         data.append('country', country);
         data.append('dob', dob);
@@ -46,7 +33,16 @@ document.addEventListener('DOMContentLoaded', () => {
         return false;
 
     }
+    
     document.querySelector('#change_pass').onclick = () => {
 
     }
+    
+    document.getElementById("pic").onchange = function () {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById("profile").src = e.target.result;
+        };
+        reader.readAsDataURL(this.files[0]);
+    };
 });

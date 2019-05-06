@@ -28,13 +28,12 @@ class LoginForm(forms.Form):
         user.save()
         return user
 
+class ProfileForm(forms.Form):
+    email    = forms.CharField(label='email')
+    name     = forms.CharField(label='name')
+    country  = forms.CharField(label='country')
+    dob      = forms.DateField(label='dob')
 
-class UserCreationForm(forms.ModelForm):
-    class Meta:
-        model = users
-        fields = ('email', 'name', 'country', 'image',
-        'dob')
-    
     def change(self, user):
         user.email   = self.cleaned_data['email']
         user.name    = self.cleaned_data['name']
@@ -44,7 +43,14 @@ class UserCreationForm(forms.ModelForm):
             user.save()
             return True
         except:
-            return False 
+            return False
+
+
+class UserCreationForm(forms.ModelForm):
+    class Meta:
+        model = users
+        fields = ('email', 'name', 'country', 'image',
+        'dob') 
 
 class UserChangeForm(forms.ModelForm):
     """A form for updating users. Includes all the fields on
