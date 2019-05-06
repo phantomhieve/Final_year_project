@@ -55,9 +55,7 @@ class profile_view(APIView):
     def get(self, request):
         user = get_user(request)
         data = getUserdata(user)
-        print(data)
         return render(request, 'accounts/profile.html', data)
-
 
     def post(self, request):
         status = False
@@ -65,7 +63,7 @@ class profile_view(APIView):
         form = ProfileForm(request.POST)
         if form.is_valid():
             user = get_user(request)
-            user.image = image
+            if image: user.image = image
             status = form.change(user)       
         return Response({
             'success': status

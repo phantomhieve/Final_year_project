@@ -3,24 +3,49 @@
   - pillow
   - channels
 
-Front end (Sanjeev)
-  - login
-  - signup
+Atul:-
+- Done:
+    - Data Base Design
+      - Anime
+      - Users
+      - Actions
+    
+    - Front End
+      - login
+      - login (AJAX javascript)
+      - Register
+      - Register(AJAX javascript)
+      - profile (AJAX javascript)
+    
+    - Backend
+      - user view
+      - register view
+      - profile view
+      - animes view
+      - anime view
+      - Extra dependency(anime and users)
   
-Api Anime (Atul)
-  - to fetch content group
-  - to fetch content single
-  - to put content single
+  - To Do
+    - Front end
+      - main(AJAX)
+      - anime edit(AJAX)
+    
+    - Backend
+      - edit function
+      - rest_framework(views for post)
 
-Front end (Sanjeev)
-  - Main page
-  - Anime display
 
-Functions (Atul)
-  - rating
-  - move from temp to permanent
-  - add contributions
+Sanjeev :-
+  - Done:
+    - Front end
+      - Profile
+      - Navbar
+      - Footer
 
-ChatApp (Atul)
+  - To Do
+    - Front end
+      - main page
+      - anime view
+      - anime edit
 
-Front end chatapp(Sanjeev)
+

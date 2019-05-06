@@ -10,7 +10,7 @@ class special(models.Model):
 
 class usersManager(BaseUserManager):
     
-    def create_user(self, email, username, country, name, password):
+    def create_user(self, username, password, email,  country, name):
         """
         Creates and saves a User with the given email, date of
         birth and password.
@@ -70,6 +70,7 @@ class users(AbstractBaseUser, PermissionsMixin):
     objects = usersManager()
 
     USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email', 'country', 'name']
     
     def __str__(self):
         return self.username
