@@ -13,6 +13,9 @@ img {
     margin-left: auto;
     margin-right: auto;
 }
+.myColorBack{
+    background: #1ab7ea !important;
+}
 
 
 /* #imageUpload

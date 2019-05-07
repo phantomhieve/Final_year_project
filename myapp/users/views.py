@@ -60,11 +60,16 @@ class profile_view(APIView):
     def post(self, request):
         status = False
         image  = request.FILES.get('image', None)
+        print(image)
         form = ProfileForm(request.POST)
+        print(form.data)
         if form.is_valid():
+            print('a valid form')
             user = get_user(request)
             if image: user.image = image
             status = form.change(user)       
+        else:
+            print('not a valid form')
         return Response({
             'success': status
         })        

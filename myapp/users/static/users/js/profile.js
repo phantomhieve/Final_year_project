@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
         Function to update the user data.
     */
     document.querySelector('#edit_profile').onclick = () => {
-        alert('hello');
         const request = new XMLHttpRequest();
         
         const fname   = document.querySelector('#fname').value;
