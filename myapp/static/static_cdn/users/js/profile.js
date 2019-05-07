@@ -50,10 +50,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     /*
         Function to change user password.
+    */
     document.querySelector('#change_pass').onclick = () => {
 
     }
-    */
+
     /*
         Function to display image before upload.
     */

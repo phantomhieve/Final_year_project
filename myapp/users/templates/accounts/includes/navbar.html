@@ -1,0 +1,30 @@
+<!-- Nav bar starts here -->
+{% block content %}
+<nav class="nav-wrapper blue darken-1">
+        <div class="container">
+            <a href="#" class="brand-logo">AnMe</a>
+            <a href="#" class="sidenav-trigger" data-target="mobile-links">
+                <i class="material-icons">menu</i>
+            </a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Logout</a></li>
+                <li><a href="#" class="btn-floating blue darken-4 z-depth-0">
+                    <i class="material-icons">notifications</i>
+                </a></li>
+                <li><span class="badge white-text pink new">10</span></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Nav bar ends here -->
+
+    <!-- Sidenav bar starts here -->
+    <ul class="sidenav" id="mobile-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Register</a></li>
+        <li><a href="#">Login</a></li>
+    </ul>
+    {% endblock content %}
+    <!-- Sidenav bar ends here -->
