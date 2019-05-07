@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const dob     = document.querySelector('#dob').value;
         const pic     = document.querySelector('#pic');
         
-        request.open('POST', base+'/profile/');
+        request.open('POST', base+'/main/');
 
         request.onload = ()=>{
             const data = JSON.parse(request.responseText);

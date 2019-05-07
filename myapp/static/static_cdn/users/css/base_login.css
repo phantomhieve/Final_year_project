@@ -52,7 +52,7 @@
     font-size: 34px;
     font-weight: 700;
     letter-spacing: 2px;
-    color: #1ab7ea;
+    color: var(--main-bg-color);
     position: relative;
  }
  
@@ -63,7 +63,7 @@
     position: absolute;
     top: 0;
     left: -50px;
-    background: #1ab7ea;
+    background: var(--main-bg-color);
  }
  
  .input,
@@ -145,7 +145,7 @@
  }
  
  .input .spin {
-    background: #1ab7ea;
+    background: var(--main-bg-color);
     z-index: 4;
     width: 0;
  }
@@ -194,7 +194,7 @@
  
  .button button {
     background-color: #fff;
-    color: #1ab7ea;
+    color: var(--main-bg-color);
     border: none;
  }
  
@@ -230,8 +230,8 @@
  }
  
  .button.login button:hover {
-    color: #1ab7ea;
-    border-color: #1ab7ea;
+    color: var(--main-bg-color);
+    border-color: var(--main-bg-color);
  }
  
  .button {
@@ -258,7 +258,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background: #1ab7ea;
+    background: var(--main-bg-color);
     border-radius: 50%;
  }
  
@@ -307,7 +307,7 @@
     width: 140px;
     height: 140px;
     border-radius: 50%;
-    background: #1ab7ea;
+    background: var(--main-bg-color);
     position: absolute;
     top: 40px;
     right: -70px;
@@ -400,7 +400,7 @@
     outline: none;
  }
  .message {
-    color: #1ab7ea;
+    color: var(--main-bg-color);
  }
  .message_register{
     color: #5d4037;
