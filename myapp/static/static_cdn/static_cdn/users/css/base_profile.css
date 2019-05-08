@@ -1,0 +1,57 @@
+.box {
+    height: 200px;
+}
+nav .badge {
+    position: relative;
+    top: 5px;
+    right: 32px;
+}
+img {
+    border-radius: 50%;
+    height: 170px;
+    width: 170px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#imageUpload
+{
+    display: none;
+}
+
+/* .box {
+    height: 200px;
+}
+nav .badge {
+    position: relative;
+    top: 5px;
+    right: 32px;
+}
+img {
+    border-radius: 50%;
+}
+
+#imageUpload
+{
+    display: none;
+}
+
+#profileImage
+{
+    cursor: pointer;
+}
+
+#profile-container {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+}
+
+#profile-container img {
+    width: 150px;
+    height: 150px;
+} */

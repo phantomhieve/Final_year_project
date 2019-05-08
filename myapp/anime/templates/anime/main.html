@@ -1,0 +1,32 @@
+{% extends "accounts/base/base.html" %}
+{% block data %}
+   {% load staticfiles %}
+   {% csrf_token %}
+{% endblock %}
+
+{% block title %} 
+   Profile
+{% endblock %}
+
+{% block css %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="{% static 'users/css/base_profile.css' %}">
+{% endblock %}
+
+{% block body %}
+    {% include 'accounts/includes/navbar.html' %}
+{% endblock %}
+{% block script %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <scipt src="{% static 'users/js/profile.js' %}"></script>
+    <script src="{% static 'users/js/base_profile.js' %}"></script>
+{% endblock %}
+
+{% block footer %}
+    {% include 'accounts/includes/footer.html' %}
+{% endblock %}
+
+
+
+

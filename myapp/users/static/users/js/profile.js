@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const dob     = document.querySelector('#dob').value;
         const pic     = document.querySelector('#pic');
         
-        request.open('POST', base+'/main/');
+        request.open('POST', base+'/profile/');
 
         request.onload = ()=>{
             const data = JSON.parse(request.responseText);
@@ -50,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
     /*
         Function to change user password.
     document.querySelector('#change_pass').onclick = () => {
-
     }
     */
     /*

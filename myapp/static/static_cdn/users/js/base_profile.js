@@ -1,13 +1,13 @@
 $(document).ready(function() {
-    $('.sidenav').sidenav();
-    $('.datepicker').datepicker();
+    // $('.sidenav').sidenav();
     $('select').formSelect();
+    $('.datepicker').datepicker();
 });
 
 
-$("#imageUpload").change(function(){
-    fasterPreview( this );
-});
+// $("#imageUpload").change(function(){
+//     fasterPreview( this );
+// });
 
 
 
