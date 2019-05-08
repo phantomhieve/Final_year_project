@@ -7,21 +7,26 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title></title>
+    
+    <!-- CSS starts here -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="{% static 'users/css/base_profile.css' %}">
+    <!-- CSS ends here -->
 
 </head>
-<body>
-    {% include 'accounts/includes/navbar.html' %}
 
-    <!-- Form page container starts here -->
-    <div class="row container white z-depth-2">
+<body>
+
+    {% include 'accounts/includes/navbar.html' %}
+    <main>
+        <!-- Form page container starts here -->
+        <div class="row container white z-depth-2">
             <div class="col s12 m4 l3">
             <!-- <div class="col s12 l5 offset-l2"> -->
                 <div class = "row">
                     <div class = "input-field center col s12 m12 l12">
-                        <image class="" id="profile" src="{{ image }}"/>
+                        <img class="" id="profile" src="{{ image }}"/>
                         <!-- <input id="pic" type="file" name="pic" placeholder="Photo" required="" capture> -->
                         <div class="file-field input-field">
                             <div class="btn">
@@ -36,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            
+                
             <div class="col s12 m8 l9">
                 <div class="row">
                     <div class="input-field col s6 m6 l6 ">
@@ -87,6 +92,7 @@
                 </div>
             </div>
         </div>
+    </main>
     <!-- Form page container ends here -->
 
     {% include 'accounts/includes/footer.html' %}

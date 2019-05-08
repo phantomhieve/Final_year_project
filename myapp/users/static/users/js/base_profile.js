@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    // $('.sidenav').sidenav();
+    $('.sidenav').sidenav();
     $('select').formSelect();
     $('.datepicker').datepicker();
 });
@@ -9,12 +9,6 @@ $(document).ready(function() {
 //     fasterPreview( this );
 // });
 
-
-
-// $(document).ready(function() {
-//     $('.sidenav').sidenav();
-//     $('.datepicker').datepicker();
-// });
 
 // $("#profileImage").click(function(e) {
 //     $("#imageUpload").click();
@@ -34,8 +28,4 @@ $(document).ready(function() {
 // document.addEventListener('DOMContentLoaded', function() {
 //     var elems = document.querySelectorAll('select');
 //     var instances = M.FormSelect.init(elems, options);
-// });
-
-// $(document).ready(function(){
-//     $('select').formSelect();
 // });
