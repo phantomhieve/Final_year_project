@@ -16,10 +16,9 @@
 
 {% block body %}
     {% include 'accounts/includes/navbar.html' %}
-    <!--
-        Test card
-    -->
+   
 <main>
+     <!--Test card-->
     {% for i in row %}
     <div class="container">
         <div class="row">
@@ -37,7 +36,9 @@
                         <!-- <p><a href="#">This is a link</a></p> -->
                     </div>
                     <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right ">close</i></span>
+                        <span class="card-title grey-text text-darken-4">
+                            <i class="material-icons right ">close</i>
+                        </span>
                         <p id="data_{{ j }}"></p>
                     </div>
                 </div>
@@ -46,11 +47,28 @@
         </div>
     </div>  
     {% endfor %}  
+    <!--Test card ends here-->
+    <!--Pagination-->
+    <div class="container">
+        <ul class="pagination right white" style="opacity: 0.8">
+            <li class="waves-effect">
+                <a href="" id="btn_prev">
+                    <i class="material-icons">chevron_left</i>
+                </a>
+            </li>
+            <li class="active">
+                <a href="#!" id="page">1</a>
+            </li>
+            <li class="waves-effect">
+                <a href="#" id="btn_next">
+                    <i class="material-icons">chevron_right</i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!--Pagination ends here-->
 </main>
-    <!--
-        Test card 
-        ends here
-    -->
+    
 {% endblock %}
 {% block script %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> 

@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if(! data.success)
                 message = 'Try again ERROR occoured'
             M.toast({html: message, classes: 'rounded'})
-        }
+        };
         
         request.setRequestHeader("X-CSRFToken", csrftoken);
         const data = new FormData();

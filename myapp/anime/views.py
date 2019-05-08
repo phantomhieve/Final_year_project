@@ -10,9 +10,10 @@ from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.permissions import IsAuthenticated
 
 
-from .models import Anime, Genre
 from .serializers import AnimeSerializer, GenreSerializer
 from actions.backend import addView
+from .backend import (getAnimePageData, 
+getAnimeData, getPermanentAnimePageCount)
 
 class AnimeView(APIView):
     '''
@@ -23,17 +24,14 @@ class AnimeView(APIView):
 
     return JSON format (each field):
     {
-        id, name, image , info, release_date, average_rating, 
-        episodes (csv field i'th index denotes episodes in i+1 Season)
+        data:   id, name, image , info, release_date, average_rating, 
+                episodes (csv field i'th index denotes episodes in i+1 Season)
+        pages:  Count of tota pages
     }
     '''
     def get(self, request):
-        onePage=9
         page = int(request.query_params.get('page', 1)) - 1
-        anime  = Anime.objects.filter(correct=True)[
-            onePage*page:
-            onePage*(page+1)
-        ]
+        anime = getAnimePageData(page)
         anime_serializer = AnimeSerializer(anime, many= True)
         return Response(anime_serializer.data)
 
@@ -66,8 +64,13 @@ class SingleAnimeView(APIView):
     def get(self, request):
         animeId = int(request.query_params.get('animeId', 1))
         userId  = request.query_params.get('userId', None)
+        anime   = getAnimeData(animeId)
+        if not anime: 
+            return Response({
+                "Status": None
+            })
+        
         if userId: addView(int(userId), animeId)
-        anime     = Anime.objects.filter(id = animeId)
         genre     = anime[0].genre.all()
         anime_serializer = AnimeSerializer(anime, many=True)
         genre_serializer = GenreSerializer(genre, many=True)
@@ -79,10 +82,19 @@ class SingleAnimeView(APIView):
     def post(self, request):
         pass
 
+class getPageView(APIView):
+    permission_classes = (IsAuthenticated,)
+    def get(self, request):
+        return Response({
+            'pages': getPermanentAnimePageCount()
+        }) 
+
+
+
 @login_required()
 def main_view(request):
     args = {
         'username': request.user.username,
-        'row': [[ j for j in range(i*3+1, (i+1)*3+1)] for i in range(3)]
+        'row': [[ j for j in range(i*3+1, (i+1)*3+1)] for i in range(3)],
     }
     return render(request, 'anime/main.html', args)
