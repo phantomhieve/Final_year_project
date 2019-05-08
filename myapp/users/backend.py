@@ -1,4 +1,3 @@
-from datetime import datetime
 def getUserdata(user):
     fname, lname, name  = '', '', user.name
     if name: 

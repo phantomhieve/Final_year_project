@@ -22,9 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const lname   = document.querySelector('#lname').value;
         const email   = document.querySelector('#email').value;
         const country = document.querySelector('#country').value;
-        const dob     = document.querySelector('#dob').value;
+        var date    = new Date(document.querySelector('#dob').value);
         const pic     = document.querySelector('#pic');
-        
+        const dob     = fixDate(date); 
         request.open('POST', base+'/profile/');
 
         request.onload = ()=>{
@@ -62,4 +62,13 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         reader.readAsDataURL(this.files[0]);
     };
+    /*
+        Function to fix date
+    */
+   function fixDate(date){
+        var day=date.getDate(), month=date.getMonth()+1, year=date.getFullYear();
+        if(month<10) month = '0'+month;
+        if(day<10) day = '0'+day;
+        return year+"-"+month+"-"+day
+    }
 });
