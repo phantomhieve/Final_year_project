@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block title %} 
-   Profile
+   AnMe
 {% endblock %}
 
 {% block css %}
@@ -16,17 +16,47 @@
 
 {% block body %}
     {% include 'accounts/includes/navbar.html' %}
+    <!--
+        Test card
+    -->
+<main>
+    {% for i in row %}
+    <div class="container">
+        <div class="row">
+            {% for j in i %}
+            <div class="col s12 m4 l4" id="card_{{ j }}">
+                <div class="card" style="opacity: 0.8;">
+                    <div class="card-image waves-effect waves-block waves-light">
+                            <img class="activator" src="" id ="image_{{ j }}">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">
+                            <i class="material-icons right">pageview</i>
+                            <p id="title_{{ j }}"></p>
+                        </span>
+                        <!-- <p><a href="#">This is a link</a></p> -->
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right ">close</i></span>
+                        <p id="data_{{ j }}"></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>  
+    {% endfor %}  
+</main>
+    <!--
+        Test card 
+        ends here
+    -->
 {% endblock %}
 {% block script %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <scipt src="{% static 'users/js/profile.js' %}"></script>
-    <script src="{% static 'users/js/base_profile.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> 
+    <script src="{% static 'anime/js/main.js' %}"></script>
 {% endblock %}
 
 {% block footer %}
     {% include 'accounts/includes/footer.html' %}
 {% endblock %}
-
-
-
-

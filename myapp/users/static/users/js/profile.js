@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    
     var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
     const base = window.location.origin;
 
@@ -31,12 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
             message = 'Sucessfully updated data'
             if(! data.success)
                 message = 'Try again ERROR occoured'
-            alert(message);
+            M.toast({html: message, classes: 'rounded'})
         }
         
         request.setRequestHeader("X-CSRFToken", csrftoken);
         const data = new FormData();
-        new FileReader
         data.append('name', fname+' '+lname)
         data.append('image', pic.files[0]);
         data.append('email', email);

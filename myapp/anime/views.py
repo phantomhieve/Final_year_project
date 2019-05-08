@@ -10,7 +10,6 @@ from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.permissions import IsAuthenticated
 
 
-
 from .models import Anime, Genre
 from .serializers import AnimeSerializer, GenreSerializer
 from actions.backend import addView
@@ -29,7 +28,7 @@ class AnimeView(APIView):
     }
     '''
     def get(self, request):
-        onePage=2
+        onePage=9
         page = int(request.query_params.get('page', 1)) - 1
         anime  = Anime.objects.filter(correct=True)[
             onePage*page:
@@ -83,6 +82,7 @@ class SingleAnimeView(APIView):
 @login_required()
 def main_view(request):
     args = {
-        'user': request.user
+        'username': request.user.username,
+        'row': [[ j for j in range(i*3+1, (i+1)*3+1)] for i in range(3)]
     }
     return render(request, 'anime/main.html', args)
