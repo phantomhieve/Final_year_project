@@ -18,7 +18,7 @@
     {% include 'accounts/includes/navbar.html' %}
     <!-- Form page container starts here -->
     <main class="">
-        <div class ="container white z-depth-2 outerBox">
+        <div class ="container white z-depth-2 profileBox">
             <div class="row" >
                 <div class="col s12 m4 l3" >
                 <!-- <div class="col s12 l5 offset-l2"> -->
@@ -35,13 +35,13 @@
                 
                 <div class="col s12 m8 l9">
                     <div class="row">
-                        <div class="input-field col s6 m6 l6 ">
+                        <div class="input-field col s12 m6 l6 ">
                             <i class="material-icons blue-text prefix">face</i>
                             <input type="text" name="fname" id="fname" value="{{ fname }}">
                             <label for="fname">First name</label>
                         </div>
                         
-                        <div class="input-field col s6 m6 l6 ">
+                        <div class="input-field col s12 m6 l6 ">
                             <i class="material-icons blue-text prefix">face</i>
                             <input type="text" name="lname" id="lname" value="{{ lname }}">
                             <label for="lname">Last name</label>
@@ -89,7 +89,6 @@
 {% block script %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="{% static 'users/js/profile.js' %}"></script>
-    <script src="{% static 'users/js/base_profile.js' %}"></script>
 {% endblock %}
 
 {% block footer %}

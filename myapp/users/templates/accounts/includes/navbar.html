@@ -9,9 +9,12 @@
             </a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="/">Home</a></li>
-                <li><a href="/profile">{{ username }}</a></li>
+                <li><a href="/profile">{{ request.user.username }}</a></li>
+                {% if request.user.is_mod %}
+                <li><a href="#" id="mod1">Moderator</a></li>
+                {% endif %}
                 <li><a href="/logout">Logout</a></li>
-                <li><a href="#" class="btn-floating blue darken-4 z-depth-0">
+                <li><a href="" class="btn-floating blue darken-4 z-depth-0">
                     <i class="material-icons">notifications</i>
                 </a></li>
                 <li><span class="badge white-text pink new">10</span></li>
@@ -23,10 +26,12 @@
 
     <!-- Sidenav bar starts here -->
     <ul class="sidenav" id="mobile-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Register</a></li>
-        <li><a href="#">Login</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/profile">{{ request.user.username }}</a></li>
+        {% if request.user.is_mod %}
+            <li><a href="" id="mod2">Moderator</a></li>
+        {% endif %}
+        <li><a href="/logout">Logout</a></li>
     </ul>
     <!-- Sidenav bar ends here -->
 {% endblock content %}

@@ -9,5 +9,6 @@ urlpatterns = [
     path('animes/', views.AnimeView.as_view()),
     path('anime/', views.SingleAnimeView.as_view()),
     path('main/', views.main_view),
+    path('anime/page/', views.anime_page_view),
     path('page/', views.getPageView.as_view())
 ]

@@ -2,13 +2,38 @@
     --main-bg-color:#1ab7ea;  
 }
 body{
-    background-image: url(https://i.pinimg.com/originals/3c/7a/fc/3c7afc1b68c0f8cc367dd9d0f1f383de.jpg);
-    background-repeat: no-repeat, repeat;
+    background-image: url(https://i.pinimg.com/originals/3c/7a/fc/3c7afc1b68c0f8cc367dd9d0f1f383de.jpg); 
+    background-repeat: no-repeat;
     background-size: cover;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+main {
+    flex: 1 0 auto;
+}
+/* NavBar*/
+nav{
+    background-color: var(--main-bg-color) !important; 
+    margin-bottom: 30px !important;
+}
+nav .badge {
+    position: relative !important;
+    top: 5px !important;
+    right: 32px !important;
+}
+.sidenav {
+    background-color: var(--main-bg-color) !important; 
+    opacity: .8 !important;
+}
+.sidenav>li a{
+    color: white !important;
+}
+
+/* Footer */
+.page-footer{
+    background-color: var(--main-bg-color) !important; 
 }
 .myColorBack{
     background: var(--main-bg-color)!important;
-}
-nav{
-    margin-bottom: 20px;
 }

@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
     const base = window.location.origin;
-
+    const login = findGetParameter('login');
 
     /*
         emulate form submission on 'Enter'
@@ -25,13 +25,17 @@ document.addEventListener('DOMContentLoaded', () => {
         var date    = new Date(document.querySelector('#dob').value);
         const pic     = document.querySelector('#pic');
         const dob     = fixDate(date); 
+        
         request.open('POST', base+'/profile/');
 
         request.onload = ()=>{
             const data = JSON.parse(request.responseText);
             message = 'Sucessfully updated data'
             if(! data.success)
-                message = 'Try again ERROR occoured'
+                message = 'Fill all the fields'
+            if(login){
+                window.location.replace(base+'/main/');
+            }
             M.toast({html: message, classes: 'rounded'})
         };
         
@@ -46,12 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return false;
 
     }
-    
-    /*
-        Function to change user password.
-    document.querySelector('#change_pass').onclick = () => {
-    }
-    */
     /*
         Function to display image before upload.
     */
@@ -70,5 +68,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if(month<10) month = '0'+month;
         if(day<10) day = '0'+day;
         return year+"-"+month+"-"+day
+    }
+    /*
+        Funcion to retrive get param
+    */
+    function findGetParameter(parameterName) {
+        var result = null,
+            tmp = [];
+        location.search
+            .substr(1)
+            .split("&")
+            .forEach(function (item) {
+            tmp = item.split("=");
+            if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+            });
+        return result;  
     }
 });

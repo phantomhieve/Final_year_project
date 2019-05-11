@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         request.onload = ()=>{
             const data = JSON.parse(request.responseText);
             if(data.success)
-                window.location.replace(base+'/profile/')
+                window.location.replace(base+'/profile/?login=true');
             else
                 message = 'Username allredy exist';
             document.querySelector('.message_register').innerHTML = message;

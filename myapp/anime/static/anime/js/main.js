@@ -5,12 +5,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const base = window.location.origin;
     var total_pages = 1 , current_page = 1;
     var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+    const temp = findGetParameter('temp');
     loadPage();
     
     
     function loadPage(){
         const request = new XMLHttpRequest();
-        request.open('GET', base+'/page/')
+        request.open('GET', base+'/page/?temp='+temp)
         request.onload = ()=>{
             const data = JSON.parse(request.responseText);
             total_pages = data.pages;
@@ -25,7 +26,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     */
    function changePage(page){
         const request = new XMLHttpRequest();
-        request.open('GET', base+'/animes/?page='+page);
+        request.open('GET', base+'/animes/?page='+page+'&temp='+temp);
         request.onload = ()=>{
             const data = JSON.parse(request.responseText);
             putData(data);
@@ -75,6 +76,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
         for(var i=1; i<size+1; i++){
             var anime = data[i-1];
+            document.querySelector("#anime_"+i).href=base+'/anime/page/?animeId='+anime.id;
             document.querySelector("#image_"+i).src = anime.image;
             document.querySelector("#title_"+i).innerHTML = anime.name;
             document.querySelector("#data_"+i).innerHTML = anime.info.substring(0,200)+"....";
@@ -83,5 +85,19 @@ document.addEventListener('DOMContentLoaded', ()=>{
             document.querySelector("#card_"+i).style.display = "none";
         }
     }
-    return false;
+    /*
+        Funcion to retrive get param
+    */
+    function findGetParameter(parameterName) {
+        var result = false;
+        tmp = [];
+        location.search
+            .substr(1)
+            .split("&")
+            .forEach(function (item) {
+                tmp = item.split("=");
+                if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+            });
+        return result;
+    }
 });
