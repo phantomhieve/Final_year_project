@@ -1,16 +1,17 @@
 <!-- Nav bar starts here -->
 {% block content %}
 <header>
-    <nav class="nav-wrapper blue darken-1">
+
+    <nav class="nav-wrapper baseColor">
         <div class="container">
             <a href="#" class="brand-logo">AnMe</a>
             <a href="#" class="sidenav-trigger" data-target="mobile-links">
                 <i class="material-icons">menu</i>
             </a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Logout</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/profile">{{ username }}</a></li>
+                <li><a href="/logout">Logout</a></li>
                 <li><a href="#" class="btn-floating blue darken-4 z-depth-0">
                     <i class="material-icons">notifications</i>
                 </a></li>
@@ -28,5 +29,5 @@
         <li><a href="#">Register</a></li>
         <li><a href="#">Login</a></li>
     </ul>
-    {% endblock content %}
     <!-- Sidenav bar ends here -->
+{% endblock content %}

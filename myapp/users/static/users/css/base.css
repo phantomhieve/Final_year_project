@@ -1,0 +1,14 @@
+:root {
+    --main-bg-color:#1ab7ea;  
+}
+body{
+    background-image: url(https://i.pinimg.com/originals/3c/7a/fc/3c7afc1b68c0f8cc367dd9d0f1f383de.jpg);
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+}
+.myColorBack{
+    background: var(--main-bg-color)!important;
+}
+nav{
+    margin-bottom: 20px;
+}

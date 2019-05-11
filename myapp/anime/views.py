@@ -1,9 +1,13 @@
-from django.http import HttpResponse 
-from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, authenticate, logout, get_user
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
 
 from rest_framework import viewsets, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.renderers import TemplateHTMLRenderer
+from rest_framework.permissions import IsAuthenticated
 
 
 from .models import Anime, Genre
@@ -24,7 +28,7 @@ class AnimeView(APIView):
     }
     '''
     def get(self, request):
-        onePage=2
+        onePage=9
         page = int(request.query_params.get('page', 1)) - 1
         anime  = Anime.objects.filter(correct=True)[
             onePage*page:
@@ -74,3 +78,11 @@ class SingleAnimeView(APIView):
             
     def post(self, request):
         pass
+
+@login_required()
+def main_view(request):
+    args = {
+        'username': request.user.username,
+        'row': [[ j for j in range(i*3+1, (i+1)*3+1)] for i in range(3)]
+    }
+    return render(request, 'anime/main.html', args)

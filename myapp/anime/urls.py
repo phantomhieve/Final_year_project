@@ -8,4 +8,5 @@ from . import views
 urlpatterns = [
     path('animes/', views.AnimeView.as_view()),
     path('anime/', views.SingleAnimeView.as_view()),
+    path('main/', views.main_view),
 ]

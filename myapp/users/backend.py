@@ -14,7 +14,7 @@ def getUserdata(user):
         'email'   : user.email if user.email else '',
         'dob'     : str(user.dob),
         'country' : user.country if user.country else '',
-        'image'   : user.image.url if user.image else '',
+        'image'   : user.image.url if user.image else '/media/profile_image/default.jpg',
         'fname'   : fname,
         'lname'   : lname,
     }
