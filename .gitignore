@@ -3,6 +3,7 @@ images
 .DS_Store
 Documentation/.DS_Store
 myapp/images
+myapp/db.sqlite3
 
 myapp/users/__pycache__
 myapp/users/migrations
