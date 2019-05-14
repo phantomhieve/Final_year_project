@@ -19,5 +19,5 @@ AnMe is an “open source” web application that serves as a wikipedia for the 
 
 ## Contact info:
 
-- [phantomhieve](https://github.com/phantomhieve)   [Email](mailto:khetanatulz@gmail.com)
-- [noitking](https://github.com/noitking)   [Email](mailto:sanjeev22.m@gmail.com)
+- Atul Khetan [phantomhieve](https://github.com/phantomhieve)   [Email](mailto:khetanatulz@gmail.com)
+- Sanjeev Mahunta [noitking](https://github.com/noitking)   [Email](mailto:sanjeev22.m@gmail.com)
