@@ -1,21 +1,21 @@
 # Project heading
 
-AnMe is an “open source” web application that serves as a wikipedia for the Anime Community where users would be able to:
-- Browse
-- Modify
-- Edit content
+AnMe is an “open source” platform for otakus the project started with the idea of having a community around otakus.
+This web appilication is an effort to bring the community together to build upon the information.
 
 ## Tools & Technologies:
 
-- Visual Studio Code
-- Python 3.7, JavaScript ES6
-- REST Api, Django Web Framework, Pillow
-
-## Documentation:
-
-- [Database](put link here)
-- [Backend](put link here)
-- [Frontend](put link here)
+- BackEnd
+  - Python
+  - Django
+  - Pillow
+  - REST API
+  
+- FrontEnd
+  - HTML 5
+  - CSS 3
+  - Java Script ES6
+  - Django templating engine
 
 ## Contact info:
 
