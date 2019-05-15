@@ -1,7 +1,9 @@
-# Project heading
+# AnMe
 
 AnMe is an “open source” platform for otakus the project started with the idea of having a community around otakus.
 This web appilication is an effort to bring the community together to build upon the information.
+
+> **Note**: More freature such as chat server, edit option "comming soon".
 
 ## Tools & Technologies:
 
