@@ -12,12 +12,18 @@ This web appilication is an effort to bring the community together to build upon
   - Django
   - Pillow
   - REST API
+  - Postgres
   
 - FrontEnd
   - HTML 5
   - CSS 3
   - Java Script ES6
   - Django templating engine
+  
+- Tools
+  - VS Code
+  - Chrome
+  - Terminal
 
 ## Contact info:
 
